@@ -21,7 +21,7 @@ resource "aws_lb" "example" {
   ]
 
   access_logs {
-    bucket = aws_s3_bucket.alb_log.id
+    bucket  = aws_s3_bucket.alb_log.id
     enabled = true
   }
 

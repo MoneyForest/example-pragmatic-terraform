@@ -54,8 +54,8 @@ module "aws_lb_listener" {
 
 module "aws_lb_listerner_rule" {
   source                          = "./aws_lb_listener_rule"
-  aws_lb_listener_https_arn       = module.aws_lb_listener.aws_lb_listener_https_arn
-  aws_lb_target_group_example_arn = module.aws_lb_target_group.aws_lb_target_group_example_arn
+  aws_lb_listener_https_arn       = module.aws_lb_listener.https_arn
+  aws_lb_target_group_example_arn = module.aws_lb_target_group.example_arn
 }
 
 module "aws_lb_target_group" {

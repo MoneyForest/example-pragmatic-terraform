@@ -16,7 +16,7 @@ resource "aws_route53_record" "example" {
 
 resource "aws_route53_record" "example_certificate" {
   for_each = {
-    for dvo in module.aws_acm.aws_acm_certificate_example_domain_validation_options : dvo.domain_name => {
+    for dvo in var.aws_acm_certificate_example_domain_validation_options : dvo.domain_name => {
       name   = dvo.resource_record_name
       record = dvo.resource_record_value
       type   = dvo.resource_record_type

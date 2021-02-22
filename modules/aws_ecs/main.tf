@@ -43,30 +43,17 @@ resource "aws_ecs_service" "example" {
 }
 
 module "nginx_sg" {
-  source      = "./security_group"
+  source      = "../aws_security_group"
   name        = "nginx-sg"
-  vpc_id      = aws_vpc.example.id
+  vpc_id      = "${module.aws_vpc.example.id}"
   port        = 80
   cidr_blocks = [aws_vpc.example.cidr_block]
 }
 
 module "ecs_task_execution_role" {
-  source     = "./iam_role"
+  source     = "../aws_iam"
   name       = "ecs-task-execution"
   identifier = "ecs-tasks.amazonaws.com"
   policy     = data.aws_iam_policy_document.ecs_task_execution.json
 }
 
-data "aws_iam_policy" "ecs_task_execution_role_policy" {
-  arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
-}
-
-data "aws_iam_policy_document" "ecs_task_execution" {
-  source_json = data.aws_iam_policy.ecs_task_execution_role_policy.policy
-
-  statement {
-    effect    = "Allow"
-    actions   = ["ssm:GetParameters", "kms:Decrypt"]
-    resources = ["*"]
-  }
-}

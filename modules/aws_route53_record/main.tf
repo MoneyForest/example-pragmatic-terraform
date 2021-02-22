@@ -31,7 +31,7 @@ resource "aws_route53_record" "example_certificate" {
 }
 
 module "aws_acm" {
-  source                                 = "./aws_acm"
+  source                                 = "../aws_acm"
   aws_route53_record_example_name        = aws_route53_record.example.name
   aws_route53_record_example_certificate = aws_route53_record.example_certificate
 }

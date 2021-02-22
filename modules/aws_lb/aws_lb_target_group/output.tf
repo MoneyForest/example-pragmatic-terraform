@@ -1,3 +1,3 @@
-output "aws_lb_target_group_example_arn" {
+output "example_arn" {
   value = aws_lb_target_group.example.arn
 }

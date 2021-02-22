@@ -37,7 +37,8 @@ resource "aws_s3_bucket" "public" {
 }
 
 resource "aws_s3_bucket" "alb_log" {
-  bucket = "alb-log-pragmatic-terraform-moneyforest"
+  bucket        = "alb-log-pragmatic-terraform-moneyforest"
+  force_destroy = true
 
   lifecycle_rule {
     enabled = true

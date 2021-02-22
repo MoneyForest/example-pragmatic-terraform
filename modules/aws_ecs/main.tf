@@ -45,7 +45,7 @@ resource "aws_ecs_service" "example" {
 module "nginx_sg" {
   source      = "../aws_security_group"
   name        = "nginx-sg"
-  vpc_id      = "${module.aws_vpc.example.id}"
+  vpc_id      = module.aws_vpc.example.id
   port        = 80
   cidr_blocks = [aws_vpc.example.cidr_block]
 }

@@ -36,16 +36,16 @@ resource "aws_route_table_association" "public_1" {
   route_table_id = aws_route_table.public_1.id
 }
 
-// # パブリックルート①
-// resource "aws_route" "public_0" {
-//   route_table_id         = aws_route_table.public_0.id
-//   gateway_id             = aws_internet_gateway.example.id
-//   destination_cidr_block = "0.0.0.0/0"
-// }
+# パブリックルート①
+resource "aws_route" "public_0" {
+  route_table_id         = aws_route_table.public_0.id
+  gateway_id             = var.aws_internet_gateway_example_id
+  destination_cidr_block = "0.0.0.0/0"
+}
 
-// # パブリックルート②
-// resource "aws_route" "public_1" {
-//   route_table_id         = aws_route_table.public_1.id
-//   gateway_id             = aws_internet_gateway.example.id
-//   destination_cidr_block = "0.0.0.0/0"
-// }
+# パブリックルート②
+resource "aws_route" "public_1" {
+  route_table_id         = aws_route_table.public_1.id
+  gateway_id             = var.aws_internet_gateway_example_id
+  destination_cidr_block = "0.0.0.0/0"
+}

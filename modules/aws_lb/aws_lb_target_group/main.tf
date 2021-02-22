@@ -1,7 +1,7 @@
 resource "aws_lb_target_group" "example" {
   name                 = "example"
   target_type          = "ip"
-  vpc_id               = "${module.aws_vpc.example.id}"
+  vpc_id               = module.aws_vpc.example.id
   port                 = 80
   protocol             = "HTTP"
   deregistration_delay = 300

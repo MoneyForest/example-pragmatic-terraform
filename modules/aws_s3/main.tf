@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "private" {
-  bucket = "private-pragmatic-terraform-moneyforest"
+  bucket        = "private-pragmatic-terraform-moneyforest"
   force_destroy = true
 
   versioning {
@@ -24,9 +24,9 @@ resource "aws_s3_bucket_public_access_block" "private" {
 }
 
 resource "aws_s3_bucket" "public" {
-  bucket = "public-pragmatic-terraform-moneyforest"
+  bucket        = "public-pragmatic-terraform-moneyforest"
   force_destroy = true
-  acl = "public-read"
+  acl           = "public-read"
 
   cors_rule {
     allowed_origins = ["https://makemoneyforest.com"]

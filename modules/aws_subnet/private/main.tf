@@ -36,16 +36,16 @@ resource "aws_route_table_association" "private_1" {
   route_table_id = aws_route_table.private_1.id
 }
 
-// # プライベートルート①
-// resource "aws_route" "private_0" {
-//   route_table_id         = aws_route_table.private_0.id
-//   nat_gateway_id         = aws_nat_gateway.nat_gateway_0.id
-//   destination_cidr_block = "0.0.0.0/0"
-// }
+# プライベートルート①
+resource "aws_route" "private_0" {
+  route_table_id         = aws_route_table.private_0.id
+  nat_gateway_id         = var.aws_nat_gateway_nat_gateway_0_id
+  destination_cidr_block = "0.0.0.0/0"
+}
 
-// # プライベートルート②
-// resource "aws_route" "private_1" {
-//   route_table_id         = aws_route_table.private_1.id
-//   nat_gateway_id         = aws_nat_gateway.nat_gateway_1.id
-//   destination_cidr_block = "0.0.0.0/0"
-// }
+# プライベートルート②
+resource "aws_route" "private_1" {
+  route_table_id         = aws_route_table.private_1.id
+  nat_gateway_id         = var.aws_nat_gateway_nat_gateway_1_id
+  destination_cidr_block = "0.0.0.0/0"
+}

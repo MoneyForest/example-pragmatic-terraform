@@ -14,9 +14,12 @@
 //   source = "./modules/aws_lb"
 // }
 
-// module "aws_nat_gateway" {
-//   source = "./modules/aws_nat_gateway"
-// }
+module "aws_nat_gateway" {
+  source                       = "./modules/aws_nat_gateway"
+  aws_subnet_public_0_id       = module.aws_subnet.aws_subnet_public_0_id
+  aws_subnet_public_1_id       = module.aws_subnet.aws_subnet_public_1_id
+  aws_internet_gateway_example = module.aws_vpc.aws_internet_gateway_example
+}
 
 // module "aws_route53" {
 //   source = "./modules/aws_route53"
@@ -31,8 +34,11 @@ module "aws_s3" {
 // }
 
 module "aws_subnet" {
-  source = "./modules/aws_subnet"
-  aws_vpc_id = module.aws_vpc.id
+  source                           = "./modules/aws_subnet"
+  aws_vpc_id                       = module.aws_vpc.aws_vpc_example_id
+  aws_internet_gateway_example_id  = module.aws_vpc.aws_internet_gateway_example.id
+  aws_nat_gateway_nat_gateway_0_id = module.aws_nat_gateway.aws_nat_gateway_nat_gateway_0_id
+  aws_nat_gateway_nat_gateway_1_id = module.aws_nat_gateway.aws_nat_gateway_nat_gateway_1_id
 }
 
 module "aws_vpc" {

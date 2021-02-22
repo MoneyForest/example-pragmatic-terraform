@@ -20,7 +20,3 @@ resource "aws_security_group_rule" "egress" {
   cidr_blocks       = ["0.0.0.0/0"]
   security_group_id = aws_security_group.default.id
 }
-
-output "security_group_id" {
-  value = aws_security_group.default.id
-}

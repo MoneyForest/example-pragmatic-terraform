@@ -8,15 +8,15 @@ resource "aws_route53_record" "example" {
   type    = "A"
 
   alias {
-    zone_id                = aws_lb.example.zone_id
-    name                   = aws_lb.example.dns_name
+    zone_id                = var.aws_lb_example_zone_id
+    name                   = var.aws_lb_example_dns_name
     evaluate_target_health = true
   }
 }
 
 resource "aws_route53_record" "example_certificate" {
   for_each = {
-    for dvo in aws_acm_certificate.example.domain_validation_options : dvo.domain_name => {
+    for dvo in module.aws_acm.aws_acm_certificate_example_domain_validation_options : dvo.domain_name => {
       name   = dvo.resource_record_name
       record = dvo.resource_record_value
       type   = dvo.resource_record_type
@@ -30,6 +30,8 @@ resource "aws_route53_record" "example_certificate" {
   ttl             = 60
 }
 
-output "domain_name" {
-  value = aws_route53_record.example.name
+module "aws_acm" {
+  source                                 = "./aws_acm"
+  aws_route53_record_example_name        = aws_route53_record.example.name
+  aws_route53_record_example_certificate = aws_route53_record.example_certificate
 }

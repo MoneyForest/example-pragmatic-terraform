@@ -52,14 +52,14 @@ module "aws_lb_listener" {
   aws_acm_certificate_example_arn = var.aws_acm_certificate_example_arn
 }
 
-// module "aws_lb_listerner_rule" {
-//   source                          = "./aws_lb_listener_rule"
-//   aws_lb_listener_https_arn       = module.aws_lb_listener.https_arn
-//   aws_lb_target_group_example_arn = module.aws_lb_target_group.example_arn
-// }
+module "aws_lb_listerner_rule" {
+  source                          = "./aws_lb_listener_rule"
+  aws_lb_listener_https_arn       = module.aws_lb_listener.https_arn
+  aws_lb_target_group_example_arn = module.aws_lb_target_group.example_arn
+}
 
-// module "aws_lb_target_group" {
-//   source             = "./aws_lb_target_group"
-//   aws_vpc_example_id = var.aws_vpc_example_id
-//   aws_lb_example     = aws_lb.example
-// }
+module "aws_lb_target_group" {
+  source             = "./aws_lb_target_group"
+  aws_vpc_example_id = var.aws_vpc_example_id
+  aws_lb_example     = aws_lb.example
+}

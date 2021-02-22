@@ -8,7 +8,7 @@ resource "aws_ecs_task_definition" "example" {
   memory                   = "512"
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
-  container_definitions    = file("./container_definitions.json")
+  container_definitions    = file("${path.module}/container_definitions.json")
   execution_role_arn       = module.ecs_task_execution_role.iam_role_arn
 }
 
@@ -26,13 +26,13 @@ resource "aws_ecs_service" "example" {
     security_groups  = [module.nginx_sg.security_group_id]
 
     subnets = [
-      aws_subnet.private_0.id,
-      aws_subnet.private_1.id,
+      var.aws_subnet_private_0_id,
+      var.aws_subnet_private_1_id,
     ]
   }
 
   load_balancer {
-    target_group_arn = aws_lb_target_group.example.arn
+    target_group_arn = var.aws_lb_target_group_example_arn
     container_name   = "example"
     container_port   = 80
   }
@@ -45,9 +45,9 @@ resource "aws_ecs_service" "example" {
 module "nginx_sg" {
   source      = "../aws_security_group"
   name        = "nginx-sg"
-  vpc_id      = module.aws_vpc.example.id
+  vpc_id      = var.aws_vpc_example_id
   port        = 80
-  cidr_blocks = [aws_vpc.example.cidr_block]
+  cidr_blocks = [var.aws_vpc_example_cidr_block]
 }
 
 module "ecs_task_execution_role" {
@@ -57,3 +57,16 @@ module "ecs_task_execution_role" {
   policy     = data.aws_iam_policy_document.ecs_task_execution.json
 }
 
+data "aws_iam_policy_document" "ecs_task_execution" {
+  source_json = data.aws_iam_policy.ecs_task_execution_role_policy.policy
+
+  statement {
+    effect    = "Allow"
+    actions   = ["ssm:GetParameters", "kms:Decrypt"]
+    resources = ["*"]
+  }
+}
+
+data "aws_iam_policy" "ecs_task_execution_role_policy" {
+  arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
+}

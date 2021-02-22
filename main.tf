@@ -13,13 +13,18 @@ module "aws_acm" {
   aws_route53_record_example_certificate = module.aws_route53_record.example_certificate
 }
 
-// module "aws_cloudwatch" {
-//   source = "./modules/aws_cloudwatch"
-// }
+module "aws_cloudwatch" {
+  source = "./modules/aws_cloudwatch"
+}
 
-// module "aws_ecs" {
-//   source = "./modules/aws_ecs"
-// }
+module "aws_ecs" {
+  source                          = "./modules/aws_ecs"
+  aws_vpc_example_id              = module.aws_vpc.example_id
+  aws_vpc_example_cidr_block      = module.aws_vpc.example_cidr_block
+  aws_lb_target_group_example_arn = module.aws_lb.target_group_example_arn
+  aws_subnet_private_0_id         = module.aws_subnet.private_0_id
+  aws_subnet_private_1_id         = module.aws_subnet.private_1_id
+}
 
 module "aws_lb" {
   source                          = "./modules/aws_lb"

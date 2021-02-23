@@ -18,12 +18,13 @@ module "aws_cloudwatch" {
 }
 
 module "aws_ecs" {
-  source                          = "./modules/aws_ecs"
-  aws_vpc_example_id              = module.aws_vpc.example_id
-  aws_vpc_example_cidr_block      = module.aws_vpc.example_cidr_block
-  aws_lb_target_group_example_arn = module.aws_lb.target_group_example_arn
-  aws_subnet_private_0_id         = module.aws_subnet.private_0_id
-  aws_subnet_private_1_id         = module.aws_subnet.private_1_id
+  source                                       = "./modules/aws_ecs"
+  aws_vpc_example_id                           = module.aws_vpc.example_id
+  aws_vpc_example_cidr_block                   = module.aws_vpc.example_cidr_block
+  aws_lb_target_group_example_arn              = module.aws_lb.target_group_example_arn
+  aws_subnet_private_0_id                      = module.aws_subnet.private_0_id
+  aws_subnet_private_1_id                      = module.aws_subnet.private_1_id
+  aws_cloudwatch_event_rule_example_batch_name = module.aws_cloudwatch.event_rule_example_batch_name
 }
 
 module "aws_lb" {

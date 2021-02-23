@@ -32,7 +32,7 @@ resource "aws_db_instance" "example" {
   identifier                 = "example"
   engine                     = "mysql"
   engine_version             = "5.7.25"
-  instance_class             = "db.t3.small"
+  instance_class             = "db.t3.xlarge"
   allocated_storage          = 20
   max_allocated_storage      = 100
   storage_type               = "gp2"

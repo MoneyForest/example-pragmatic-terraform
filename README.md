@@ -1,1 +1,1 @@
-# example-pragmatic-terraform
+# terraform-boilerplate

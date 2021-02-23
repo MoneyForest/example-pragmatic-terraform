@@ -27,6 +27,10 @@ module "aws_ecs" {
   aws_cloudwatch_event_rule_example_batch_name = module.aws_cloudwatch.event_rule_example_batch_name
 }
 
+module "aws_kms" {
+  source = "./modules/aws_kms"
+}
+
 module "aws_lb" {
   source                          = "./modules/aws_lb"
   aws_subnet_public_0_id          = module.aws_subnet.public_0_id

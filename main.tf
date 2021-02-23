@@ -17,6 +17,15 @@ module "aws_cloudwatch" {
   source = "./modules/aws_cloudwatch"
 }
 
+module "aws_db" {
+  source                     = "./modules/aws_db"
+  aws_subnet_private_0_id    = module.aws_subnet.private_0_id
+  aws_subnet_private_1_id    = module.aws_subnet.private_1_id
+  aws_kms_key_example_arn    = module.aws_kms.key_example_arn
+  aws_vpc_example_id         = module.aws_vpc.example_id
+  aws_vpc_example_cidr_block = module.aws_vpc.example_cidr_block
+}
+
 module "aws_ecs" {
   source                                       = "./modules/aws_ecs"
   aws_vpc_example_id                           = module.aws_vpc.example_id
@@ -25,6 +34,14 @@ module "aws_ecs" {
   aws_subnet_private_0_id                      = module.aws_subnet.private_0_id
   aws_subnet_private_1_id                      = module.aws_subnet.private_1_id
   aws_cloudwatch_event_rule_example_batch_name = module.aws_cloudwatch.event_rule_example_batch_name
+}
+
+module "aws_elasticache" {
+  source                     = "./modules/aws_elasticache"
+  aws_subnet_private_0_id    = module.aws_subnet.private_0_id
+  aws_subnet_private_1_id    = module.aws_subnet.private_1_id
+  aws_vpc_example_id         = module.aws_vpc.example_id
+  aws_vpc_example_cidr_block = module.aws_vpc.example_cidr_block
 }
 
 module "aws_kms" {

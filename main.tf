@@ -58,6 +58,10 @@ module "aws_s3_bucket" {
   source = "./modules/aws_s3_bucket"
 }
 
+module "aws_ssm_parameter" {
+  source = "./modules/aws_ssm_parameter"
+}
+
 module "aws_subnet" {
   source                           = "./modules/aws_subnet"
   aws_vpc_example_id               = module.aws_vpc.example_id

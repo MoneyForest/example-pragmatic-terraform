@@ -1,13 +1,18 @@
 version: 2
-
 jobs:
-  plan-apply:
-    working_directory: /tmp/project
+  terraform:
+    working_directory: ~/repo/terraform/
     docker:
-      - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
+      - image: hashicorp/terraform:0.14.6
     steps:
       - checkout
       - run:
           name: terraform fmt -recursive -check
           command: |
-            terraform fmt -recursive -check
+            terraform fmt -recursive -check -diff
+
+workflows:
+  version: 2
+  terraform:
+    jobs:
+      - terraform

@@ -7,7 +7,7 @@ resource "aws_ssm_parameter" "db_username" {
 
 resource "aws_ssm_parameter" "db_password" {
   name        = "/db/password"
-  value = "uninitialized" # AWS CLIで上書きする
+  value       = "uninitialized" # AWS CLIで上書きする
   type        = "SecureString"
   description = "データベースのパスワード"
 

@@ -12,7 +12,7 @@ fmt:
 
 .PHONY: fmt-check
 fmt-check:
-	terraform fmt -recursive -check
+	terraform fmt -recursive -check -diff
 
 .PHONY: init
 init:

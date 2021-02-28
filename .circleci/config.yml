@@ -7,7 +7,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: terraform fmt -recursive -check
+          name: terraform fmt -recursive -check -diff
           command: |
             terraform fmt -recursive -check -diff
 

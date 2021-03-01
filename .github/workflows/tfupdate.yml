@@ -24,10 +24,12 @@ jobs:
 
       - name: git setting
         run: |
-          git config --local user.email ${{ secrets.GITHUB_EMAIL }}
-          git config --local user.name ${{ secrets.GITHUB_USERNAME }}
+          git config --local user.email ${{ secrets.EMAIL_GITHUB }}
+          git config --local user.name ${{ secrets.USERNAME_GITHUB }}
 
       - name: Update terraform to latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           VERSION=$(tfupdate release latest hashicorp/terraform)
           UPDATE_MESSAGE="[tfupdate] Update terraform to v${VERSION}"
@@ -46,4 +48,3 @@ jobs:
             git push origin HEAD && hub pull-request -m "$UPDATE_MESSAGE" -m "$PULL_REQUEST_BODY" -b main
             fi
           fi
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

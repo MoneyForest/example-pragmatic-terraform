@@ -24,8 +24,8 @@ jobs:
 
       - name: git setting
         run: |
-          git config --local user.email ${{ secrets.GITHUB_EMAIL }}
-          git config --local user.name ${{ secrets.GITHUB_USERNAME }}
+          git config --local user.email ${{ secrets.EMAIL_GITHUB }}
+          git config --local user.name ${{ secrets.USERNAME_GITHUB }}
 
       - name: Update terraform to latest
         env:
